@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(OpenMPTest C)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 11)
 
 include(FindOpenMP)
 if(OPENMP_FOUND)
@@ -13,7 +13,8 @@ else (OPENMP_FOUND)
 endif (OPENMP_FOUND)
 
 SET(SOURCE_FILES
-        src/main.c)
+        src/main.c
+        src/SkittlesBag.h src/SkittlesBag.c src/SkittlesBagStack.h src/SkittlesBagStack.c)
 
 SET(TEST_FILES
         src/hello.c)
