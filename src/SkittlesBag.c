@@ -11,17 +11,22 @@ typedef struct skittles_bag {
     int purple;
 } SKITTLES_BAG;
 
-void construct_skittles_bag(SKITTLES_BAG *this, int red, int orange, int yellow, int green, int purple) {
-    this->red = red;
-    this->orange = orange;
-    this->yellow = yellow;
-    this->green = green;
-    this->purple = purple;
+void construct_skittles_bag(SKITTLES_BAG *this) {
+    int bagSize = 60;
+    this->red = rand() % (bagSize + 1);
+    bagSize -= this->red;
+    this->orange = rand() % (bagSize + 1);
+    bagSize -= this->orange;
+    this->yellow = rand() % (bagSize + 1);
+    bagSize -= this->yellow;
+    this->green = rand() % (bagSize + 1);
+    bagSize -= this->green;
+    this->purple = bagSize > 0 ? bagSize : 0;
 }
 
-SKITTLES_BAG *create_skittles_bag(int red, int orange, int yellow, int green, int purple) {
+SKITTLES_BAG *create_skittles_bag() {
     SKITTLES_BAG *instance = calloc(1, sizeof(SKITTLES_BAG));
-    construct_skittles_bag(instance, red, orange, yellow, green, purple);
+    construct_skittles_bag(instance);
     return instance;
 }
 

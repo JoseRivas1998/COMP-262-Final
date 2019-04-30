@@ -2,7 +2,6 @@
 // Created by JoseR on 4/29/2019.
 //
 #include <omp.h>
-#include <time.h>
 #include "SkittlesBagStack.h"
 
 SKITTLES_BAG *openBag() {
@@ -15,7 +14,7 @@ SKITTLES_BAG *openBag() {
     bagSize -= yellow;
     int green = rand() % (bagSize + 1);
     bagSize -= yellow;
-    int purple = bagSize;
+    int purple = bagSize > 0 ? bagSize : 0;
 
     return create_skittles_bag(red, orange, yellow, green, purple);
 
@@ -24,19 +23,30 @@ SKITTLES_BAG *openBag() {
 int main() {
     int totalBagsToOpen = 0;
     int totalData = 0;
-    int openedBags;
+    int openedBags = 0;
     SKITTLES_BAG_STACK *stack;
     SKITTLES_BAG *skittlesBag;
-    srand((unsigned) time(0));
+    srand(time(0));
 
-    #pragma omp parallel shared(totalBagsToOpen, totalData) private(stack, openedBags, skittlesBag)
+#pragma omp parallel shared(totalBagsToOpen, totalData) private(openedBags, stack, skittlesBag)
     {
         stack = create_skittles_bag_stack();
         openedBags = 0;
-        while(true) {
-            skittlesBag = openBag();
-            print_skittles_bag(skittlesBag);
-            destroy_skittles_bag(skittlesBag);
+        while (true) {
+            openedBags++;
+            skittlesBag = create_skittles_bag();
+            if (is_empty(stack)) {
+                add_to_skittles_bag_stack(stack, skittlesBag);
+            } else if (is_in_skittles_bag_stack(stack, skittlesBag)) {
+                totalBagsToOpen += openedBags;
+                totalData++;
+                double average = (double) totalBagsToOpen / totalData;
+                printf("Found duplicate after %d bags, current average: %lf\n", openedBags, average);
+                openedBags = 0;
+                clear_skittles_bag_stack(stack);
+            } else {
+                add_to_skittles_bag_stack(stack, skittlesBag);
+            }
         }
     }
 

@@ -24,7 +24,7 @@ SKITTLES_BAG_STACK *create_skittles_bag_stack() {
 }
 
 bool is_empty(SKITTLES_BAG_STACK *this) {
-    return this->head == NULL;
+    return this == NULL || this->head == NULL;
 }
 
 bool is_in_skittles_bag_stack(SKITTLES_BAG_STACK *this, SKITTLES_BAG *val) {
@@ -69,11 +69,14 @@ void destruct_skittles_bag_stack(SKITTLES_BAG_STACK *this) {
 }
 
 void clear_skittles_bag_stack(SKITTLES_BAG_STACK *this) {
-    destroy_skittles_bag_stack(this);
+    destruct_skittles_bag_stack(this);
     this->head = NULL;
 }
 
 void destroy_skittles_bag_stack(SKITTLES_BAG_STACK *this) {
+    if(!this) {
+        return;
+    }
     destruct_skittles_bag_stack(this);
     this->head = NULL;
     free(this);

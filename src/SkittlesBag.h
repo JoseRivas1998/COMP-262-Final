@@ -8,10 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 typedef struct skittles_bag SKITTLES_BAG;
 
-SKITTLES_BAG *create_skittles_bag(int red, int orange, int yellow, int green, int purple);
+SKITTLES_BAG *create_skittles_bag();
 
 bool skittles_bags_equal(SKITTLES_BAG *bag1, SKITTLES_BAG *bag2);
 
