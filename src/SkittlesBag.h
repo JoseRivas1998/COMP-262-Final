@@ -14,7 +14,9 @@ typedef struct skittles_bag SKITTLES_BAG;
 
 SKITTLES_BAG *create_skittles_bag();
 
-bool skittles_bags_equal(SKITTLES_BAG *bag1, SKITTLES_BAG *bag2);
+int skittles_in_bag(SKITTLES_BAG *this);
+
+bool skittles_bags_equal(SKITTLES_BAG *bag1,SKITTLES_BAG *bag2);
 
 void print_skittles_bag(SKITTLES_BAG *this);
 

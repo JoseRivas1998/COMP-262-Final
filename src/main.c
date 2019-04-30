@@ -15,7 +15,6 @@ int main() {
 #pragma omp parallel shared(totalBagsToOpen, totalData) private(openedBags, stack, skittlesBag)
     {
         stack = create_skittles_bag_stack();
-        openedBags = 0;
         while (true) {
             openedBags++;
             skittlesBag = create_skittles_bag();
@@ -25,7 +24,7 @@ int main() {
                 totalBagsToOpen += openedBags;
                 totalData++;
                 double average = (double) totalBagsToOpen / totalData;
-                printf("Found duplicate after %d bags, current average: %lf\n", openedBags, average);
+                printf("Current average: %.2lf\n", average);
                 openedBags = 0;
                 clear_skittles_bag_stack(stack);
                 destroy_skittles_bag(skittlesBag);

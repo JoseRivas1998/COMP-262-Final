@@ -16,17 +16,15 @@ int randInt(int min, int max) {
 }
 
 void construct_skittles_bag(SKITTLES_BAG *this) {
-    // Todo make this statistically good.
-    int currentInBag = 60;
-    this->red = randInt(0, currentInBag);
-    currentInBag -= this->red;
-    this->orange = randInt(0, currentInBag);
-    currentInBag -= this->orange;
-    this->yellow = randInt(0, currentInBag);
-    currentInBag -= this->yellow;
-    this->green = randInt(0, currentInBag);
-    currentInBag -= this->green;
-    this->purple = randInt(0, currentInBag);
+    int idealPerColor = 60 / 5;
+    int deviation = 5;
+    int min = idealPerColor - deviation;
+    int max = idealPerColor + deviation;
+    this->red = randInt(min, max);
+    this->orange = randInt(min, max);
+    this->yellow = randInt(min, max);
+    this->green = randInt(min, max);
+    this->purple = randInt(min, max);
 }
 
 SKITTLES_BAG *create_skittles_bag() {
@@ -35,6 +33,9 @@ SKITTLES_BAG *create_skittles_bag() {
     return instance;
 }
 
+int skittles_in_bag(SKITTLES_BAG *this) {
+    return this->red + this->orange + this->yellow + this->green + this->purple;
+}
 
 bool skittles_bags_equal(SKITTLES_BAG *bag1, SKITTLES_BAG *bag2) {
     if (bag1 == NULL || bag2 == NULL) {
