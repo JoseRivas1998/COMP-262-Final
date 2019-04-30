@@ -11,17 +11,22 @@ typedef struct skittles_bag {
     int purple;
 } SKITTLES_BAG;
 
+int randInt(int min, int max) {
+    return rand() % (max + 1 - min) + min;
+}
+
 void construct_skittles_bag(SKITTLES_BAG *this) {
-    int bagSize = 60;
-    this->red = rand() % (bagSize + 1);
-    bagSize -= this->red;
-    this->orange = rand() % (bagSize + 1);
-    bagSize -= this->orange;
-    this->yellow = rand() % (bagSize + 1);
-    bagSize -= this->yellow;
-    this->green = rand() % (bagSize + 1);
-    bagSize -= this->green;
-    this->purple = bagSize > 0 ? bagSize : 0;
+    // Todo make this statistically good.
+    int currentInBag = 60;
+    this->red = randInt(0, currentInBag);
+    currentInBag -= this->red;
+    this->orange = randInt(0, currentInBag);
+    currentInBag -= this->orange;
+    this->yellow = randInt(0, currentInBag);
+    currentInBag -= this->yellow;
+    this->green = randInt(0, currentInBag);
+    currentInBag -= this->green;
+    this->purple = randInt(0, currentInBag);
 }
 
 SKITTLES_BAG *create_skittles_bag() {

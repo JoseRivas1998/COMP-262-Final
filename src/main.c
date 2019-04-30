@@ -4,22 +4,6 @@
 #include <omp.h>
 #include "SkittlesBagStack.h"
 
-SKITTLES_BAG *openBag() {
-    int bagSize = 60;
-    int red = rand() % (bagSize + 1);
-    bagSize -= red;
-    int orange = rand() % (bagSize + 1);
-    bagSize -= orange;
-    int yellow = rand() % (bagSize + 1);
-    bagSize -= yellow;
-    int green = rand() % (bagSize + 1);
-    bagSize -= yellow;
-    int purple = bagSize > 0 ? bagSize : 0;
-
-    return create_skittles_bag(red, orange, yellow, green, purple);
-
-}
-
 int main() {
     int totalBagsToOpen = 0;
     int totalData = 0;
@@ -44,6 +28,7 @@ int main() {
                 printf("Found duplicate after %d bags, current average: %lf\n", openedBags, average);
                 openedBags = 0;
                 clear_skittles_bag_stack(stack);
+                destroy_skittles_bag(skittlesBag);
             } else {
                 add_to_skittles_bag_stack(stack, skittlesBag);
             }
