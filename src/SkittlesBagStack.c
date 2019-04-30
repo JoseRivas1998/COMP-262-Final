@@ -68,6 +68,11 @@ void destruct_skittles_bag_stack(SKITTLES_BAG_STACK *this) {
     destructSkittlesBagNode(this->head);
 }
 
+void clear_skittles_bag_stack(SKITTLES_BAG_STACK *this) {
+    destroy_skittles_bag_stack(this);
+    this->head = NULL;
+}
+
 void destroy_skittles_bag_stack(SKITTLES_BAG_STACK *this) {
     destruct_skittles_bag_stack(this);
     this->head = NULL;

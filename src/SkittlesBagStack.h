@@ -19,6 +19,8 @@ void add_to_skittles_bag_stack(SKITTLES_BAG_STACK *this, SKITTLES_BAG *newValue)
 
 void print_skittles_bag_stack(SKITTLES_BAG_STACK *this);
 
+void clear_skittles_bag_stack(SKITTLES_BAG_STACK *this);
+
 void destroy_skittles_bag_stack(SKITTLES_BAG_STACK *this);
 
 #endif //OPENMPTEST_SKITTLESBAGSTACK_H
