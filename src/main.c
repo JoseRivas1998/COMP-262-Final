@@ -10,7 +10,7 @@ int main() {
     int openedBags = 0;
     SKITTLES_BAG_STACK *stack;
     SKITTLES_BAG *skittlesBag;
-    srand(time(0));
+    srand((unsigned int) time(0));
 
 #pragma omp parallel shared(totalBagsToOpen, totalData) private(openedBags, stack, skittlesBag)
     {
@@ -24,7 +24,9 @@ int main() {
                 totalBagsToOpen += openedBags;
                 totalData++;
                 double average = (double) totalBagsToOpen / totalData;
-                printf("Current average: %.2lf\n", average);
+                if(totalData % 50 == 0){
+                    printf("Current average: %.2lf\n", average);
+                }
                 openedBags = 0;
                 clear_skittles_bag_stack(stack);
                 destroy_skittles_bag(skittlesBag);
