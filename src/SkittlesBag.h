@@ -1,7 +1,3 @@
-//
-// Created by JoseR on 4/30/2019.
-//
-
 #ifndef OPENMPTEST_SKITTLESBAG_H
 #define OPENMPTEST_SKITTLESBAG_H
 
@@ -10,6 +6,9 @@
 #include <stdbool.h>
 #include <time.h>
 
+/**
+ * Structural representation of a skittles bag.
+ */
 typedef struct skittles_bag SKITTLES_BAG;
 
 SKITTLES_BAG *create_skittles_bag();
